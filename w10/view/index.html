@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板</title>
+  <link rel="stylesheet" href="/style/index.css">
+</head>
+<body>
+  <div id="app">
+    <div class="wrapper">
+      <div class="container">
+        <section class="new-post">
+          <form id="new-post-form" class="field-container">
+            <div class="new-post-header">新增留言</div>
+            <div class="field">
+              <div class="field-name">
+                <label for="field-author" class="field-label">姓名</label>
+              </div>
+              <div class="field-option-container">
+                <input type="text" id="field-author" name="author" autocomplete="name" placeholder="請輸入您的姓名" required />
+              </div>
+            </div>
+            <div class="field">
+              <div class="field-name">
+                <label for="field-title" class="field-label">標題</label>
+              </div>
+              <div class="field-option-container">
+                <input type="text" id="field-title" name="title" autocomplete="off" placeholder="請輸入您的標題" required />
+              </div>
+            </div>
+            <div class="field">
+              <div class="field-name">
+                <label for="field-content" class="field-label">內容</label>
+              </div>
+              <div class="field-option-container">
+                <textarea id="field-content" class="text-input vertical-resizable" name="content" cols="40" rows="3" autocomplete="off" placeholder="請輸入您的內容" required></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit">送出</button>
+            </div>
+          </form>
+        </section>
+        <section class="post-wrapper">
+          <div id="posts" class="post-container"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/script/index.js" type="module"></script>
+</body>
+</html>

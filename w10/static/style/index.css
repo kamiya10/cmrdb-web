@@ -1,0 +1,188 @@
+body {
+  margin: 0;
+  font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
+
+  --primary: rgb(23 97 166);
+  --primary-hover: hsl(209deg 72% 44%);
+  --secondary: rgb(83 94 110);
+  --outline: rgb(114 118 126);
+  --outline-variant: hsl(220deg 5% 62%);
+  --container: rgba(23 97 166 / 8%);
+  --container-hover: rgba(23 97 166 / 12%);
+  --container-target: rgba(23 97 166 / 16%);
+}
+
+#app {
+  position: absolute;
+  height: 100svh;
+  width: 100svw;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 60%;
+}
+
+.new-post-header {
+  margin-bottom: 8px;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--container);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-name {
+  padding-right: 8px;
+}
+
+.field-option-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.vertical-resizable {
+  min-height: 4em;
+  resize: vertical;
+}
+
+.form-actions,
+.post-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: end;
+}
+
+input, textarea {
+  all: unset;
+  outline: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
+  transition: outline .2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+input:hover, textarea:hover {
+  outline: 1px solid var(--outline);
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid var(--primary);
+}
+
+button {
+  all: unset;
+  padding: 8px 22px;
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 48px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
+  cursor: pointer;
+  transition: background-color .2s cubic-bezier(0.2, 0, 0, 1), color .2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:active {
+  opacity: .6;
+}
+
+button.danger {
+  color: rgb(200 54 54);
+  background-color: transparent;
+}
+
+button.danger:hover {
+  color: #fff;
+  background-color: rgb(200 54 54)
+}
+
+.new-post-header,
+button,
+label {
+  user-select: none;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  background-color: var(--container);
+  border-radius: 20px;
+  opacity: 1;
+  flex: 1;
+  transition: background-color .2s cubic-bezier(0.2, 0, 0, 1),
+              opacity .2s cubic-bezier(0.2, 0, 0, 1),
+              flex .2s cubic-bezier(0.2, 0, 0, 1);
+
+  &.deleted {
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    flex: 0;
+  }
+}
+
+.post:hover:not(:has(.danger:hover)) {
+  background-color: var(--container-hover);
+}
+
+.post-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.post-title {
+  font-size: 24px;
+  line-height: 24px;
+  color: var(--primary);
+}
+
+.post-author {
+  color: var(--outline);
+}
+
+.post-author::before {
+  content: "——";
+  margin: 0 8px;
+}
+
+.post-content {
+  word-wrap: break-word;
+}
+
+:target {
+  background-color: var(--container-target);
+}
