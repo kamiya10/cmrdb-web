@@ -1,14 +1,18 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const { existsSync, writeFileSync } = require("node:fs");
-const { join } = require("node:path");
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-if (!existsSync(join(__dirname, "database.json")))
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+if (!existsSync(join(__dirname, "database.json"))) {
   writeFileSync(join(__dirname, "database.json"), "[]");
+}
 
-const database = require(join(__dirname, "database.json"));
+const database = JSON.parse(readFileSync(join(__dirname, "database.json"), { encoding: "utf-8" }));
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.static(join(__dirname, "static")));
 
 app.get("/", (req, res) => {
@@ -17,19 +21,19 @@ app.get("/", (req, res) => {
 
 app.post("/api/create", (req, res) => {
   const data = req.body;
-  
+
   if (!(data.title && data.title && data.author)) {
     res.sendStatus(400);
     return;
   }
 
   const post = {
-    id: createUniqueId(),
-    title: data.title,
-    author: data.author,
-    content: data.content,
-    timestamp: Date.now()
-  }
+    id        : createUniqueId(),
+    title     : data.title,
+    author    : data.author,
+    content   : data.content,
+    timestamp : Date.now(),
+  };
 
   database.push(post);
   writeFileSync(join(__dirname, "database.json"), JSON.stringify(database));
@@ -43,9 +47,9 @@ app.get("/api/posts", (req, res) => {
 
 app.get("/api/post/:id", (req, res) => {
   const post = database.find(v => v.id == req.params.id);
-  
+
   if (!post) {
-    res.sendStatus(404); 
+    res.sendStatus(404);
     return;
   }
 
@@ -56,10 +60,10 @@ app.delete("/api/post/:id", (req, res) => {
   const index = database.findIndex(v => v.id == req.params.id);
 
   if (index == -1) {
-    res.sendStatus(404); 
+    res.sendStatus(404);
     return;
   }
-  
+
   const post = database[index];
   database.splice(index, 1);
   writeFileSync(join(__dirname, "database.json"), JSON.stringify(database));
@@ -74,7 +78,9 @@ function createUniqueId() {
 
   while (true) {
     const generatedId = Math.random().toString(36).substring(2, 9);
-    if (!ids.includes(generatedId))
+
+    if (!ids.includes(generatedId)) {
       return generatedId;
-  };
+    }
+  }
 }

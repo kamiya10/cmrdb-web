@@ -5,19 +5,25 @@ class ElementBuilder {
     } else {
       this.element = document.createElement(data.tag ?? "div");
 
-      if ("id" in data)
+      if ("id" in data) {
         this.element.id = data.id;
+      }
 
-      if ("class" in data)
-        if (Array.isArray(data.class))
-          for (const className of data.class)
+      if ("class" in data) {
+        if (Array.isArray(data.class)) {
+          for (const className of data.class) {
             this.element.classList.add(className);
-        else if (typeof data.class == "string")
+          }
+        } else if (typeof data.class == "string") {
           this.element.className = data.class;
+        }
+      }
 
-      if ("attributes" in data)
-        for (const key in data.attributes)
+      if ("attributes" in data) {
+        for (const key in data.attributes) {
           this.element.setAttribute(key, data.attributes[key]);
+        }
+      }
     }
   }
 
@@ -27,28 +33,36 @@ class ElementBuilder {
   }
 
   setClass(data) {
-    if (Array.isArray(data))
+    if (Array.isArray(data)) {
       this.element.className = data.join(" ");
-    else if (typeof data == "string")
+    } else if (typeof data == "string") {
       this.element.className = data;
+    }
+
     return this;
   }
 
   addClass(data) {
-    if (Array.isArray(data))
-      for (const className of data)
+    if (Array.isArray(data)) {
+      for (const className of data) {
         this.element.classList.add(className);
-    else if (typeof data == "string")
+      }
+    } else if (typeof data == "string") {
       this.element.classList.add(data);
+    }
+
     return this;
   }
 
   removeClass(data) {
-    if (Array.isArray(data))
-      for (const className of data)
+    if (Array.isArray(data)) {
+      for (const className of data) {
         this.element.classList.remove(className);
-    else if (typeof data == "string")
+      }
+    } else if (typeof data == "string") {
       this.element.classList.remove(data);
+    }
+
     return this;
   }
 
@@ -82,17 +96,21 @@ class ElementBuilder {
   }
 
   addChildren(children) {
-    if (children)
-      if (Array.isArray(children))
-        for (const child of children)
-          if (child instanceof ElementBuilder)
+    if (children) {
+      if (Array.isArray(children)) {
+        for (const child of children) {
+          if (child instanceof ElementBuilder) {
             this.element.append(child.toElement());
-          else
+          } else {
             this.element.append(child);
-      else if (children instanceof ElementBuilder)
+          }
+        }
+      } else if (children instanceof ElementBuilder) {
         this.element.append(children.toElement());
-      else
+      } else {
         this.element.append(children);
+      }
+    }
 
     return this;
   }
