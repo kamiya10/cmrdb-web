@@ -1,16 +1,24 @@
 body {
+  background-color: #fdfcff;
   margin: 0;
   font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
 
   --primary: rgb(23 97 166);
-  --outline: rgb(114 118 126);
-  --outline-variant: hsl(220deg 5% 62%);
-  --container: rgba(23 97 166 / 8%);
-  --container-hover: rgba(23 97 166 / 12%);
-  --container-target: rgba(23 97 166 / 16%);
+  --outline: hsl(34deg 11% 45%);
+  --outline-variant: hsl(34deg 11% 58%);
+  --outline-dim: #73777f;
+  --container: rgb(23 97 166 / 8%);
+  --container-hover: rgb(23 97 166 / 12%);
+  --container-target: rgb(23 97 166 / 16%);
+  --on-container: #001c38;
   --tertiary: rgb(127 87 0);
   --tertiary-hover: hsl(41deg 100% 36%);
-  --tertiary-container: rgba(127 87 0 / 8%);
+  --tertiary-container: rgb(127 87 0 / 8%);
+  --on-tertiary-container: #281900;
+  --danger: #ba1a1a;
+  --on-danger: #ffffff;
+  --primary-selection: hsl(209deg 76% 45% / 25%);
+  --tertiary-selection: hsl(34deg 11% 45% / 25%);
 }
 
 #app {
@@ -42,6 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: var(--on-tertiary-container);
   background-color: var(--tertiary-container);
   border-radius: 20px;
   padding: 24px;
@@ -77,7 +86,7 @@ body {
 
 input, textarea {
   all: unset;
-  outline: 1px solid var(--outline-variant);
+  outline: 1px solid var(--outline);
   border-radius: 8px;
   padding: 8px 12px;
   font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
@@ -85,11 +94,16 @@ input, textarea {
 }
 
 input:hover, textarea:hover {
-  outline: 1px solid var(--outline);
+  outline: 1px solid var(--outline-variant);
 }
 
 input:focus, textarea:focus {
   outline: 2px solid var(--tertiary);
+}
+
+.field-container input::selection,
+.field-container textarea::selection {
+  background-color: var(--tertiary-selection);
 }
 
 button {
@@ -114,13 +128,13 @@ button:active {
 }
 
 button.danger {
-  color: rgb(200 54 54);
+  color: var(--danger);
   background-color: transparent;
 }
 
 button.danger:hover {
-  color: #fff;
-  background-color: rgb(200 54 54)
+  color: var(--on-danger);
+  background-color: var(--danger);
 }
 
 .new-post-header,
@@ -140,6 +154,7 @@ label {
   flex-direction: column;
   gap: 8px;
   padding: 24px;
+  color: var(--on-container);
   background-color: var(--container);
   border-radius: 20px;
   opacity: 1;
@@ -172,7 +187,7 @@ label {
 }
 
 .post-author {
-  color: var(--outline);
+  color: var(--outline-dim);
 }
 
 .post-author::before {
@@ -185,6 +200,35 @@ label {
   white-space: pre-line;
 }
 
+.post-title::selection,
+.post-author::selection,
+.post-content::selection {
+  background-color: var(--primary-selection);
+}
+
 :target {
   background-color: var(--container-target);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1c1e;
+
+    --primary: rgb(163 201 255);
+    --outline: hsl(34deg 11% 45%);
+    --outline-variant: hsl(34deg 11% 58%);
+    --outline-dim: hsl(220deg 6% 64%);
+    --container: rgb(163 201 255 / 8%);
+    --container-hover: rgb(163 201 255 / 12%);
+    --container-target: rgb(163 201 255 / 16%);
+    --on-container: #d3e4ff;
+    --tertiary: hsl(38deg 95% 58%);
+    --tertiary-hover: hsl(38deg 93% 50%);
+    --tertiary-container: rgb(252 187 74 / 8%);
+    --on-tertiary-container: #ffdead;
+    --danger: #ffb4ab;
+    --on-danger: #690005;
+    --primary-selection: rgb(163 201 255 / 25%);
+    --tertiary-selection: hsl(38deg 95% 58% / 25%);
+  }
 }
