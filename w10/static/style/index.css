@@ -3,13 +3,14 @@ body {
   font-family: "Google Sans", "Noto Sans TC", "Noto Sans", sans-serif;
 
   --primary: rgb(23 97 166);
-  --primary-hover: hsl(209deg 72% 44%);
-  --secondary: rgb(83 94 110);
   --outline: rgb(114 118 126);
   --outline-variant: hsl(220deg 5% 62%);
   --container: rgba(23 97 166 / 8%);
   --container-hover: rgba(23 97 166 / 12%);
   --container-target: rgba(23 97 166 / 16%);
+  --tertiary: rgb(127 87 0);
+  --tertiary-hover: hsl(41deg 100% 36%);
+  --tertiary-container: rgba(127 87 0 / 8%);
 }
 
 #app {
@@ -41,7 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: var(--container);
+  background-color: var(--tertiary-container);
   border-radius: 20px;
   padding: 24px;
 }
@@ -88,13 +89,13 @@ input:hover, textarea:hover {
 }
 
 input:focus, textarea:focus {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--tertiary);
 }
 
 button {
   all: unset;
   padding: 8px 22px;
-  background-color: var(--primary);
+  background-color: var(--tertiary);
   color: #fff;
   border-radius: 48px;
   font-weight: 600;
@@ -105,7 +106,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--primary-hover);
+  background-color: var(--tertiary-hover);
 }
 
 button:active {
